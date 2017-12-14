@@ -6,9 +6,7 @@
 //  Copyright © 2017 JasonA Coverdale. All rights reserved.
 //
 
-// Version 1.0
-
-// hello game
+// Version 1.0 
 
 
 import SpriteKit
