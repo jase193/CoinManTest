@@ -1,15 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A278a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q4u-Cv-xB7">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Initial View Controller-->
+        <scene sceneID="HkK-Jm-rJm">
+            <objects>
+                <viewController id="q4u-Cv-xB7" customClass="InitialViewController" customModule="Coin_Man" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OrA-nD-4f3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUO-PA-1Rk">
+                                <rect key="frame" x="145" y="73" width="85" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQp-rY-ssB">
+                                <rect key="frame" x="137" y="150" width="101" height="30"/>
+                                <state key="normal" title="Reset Hi Score">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetHighScore:" destination="q4u-Cv-xB7" eventType="touchUpInside" id="wmE-PE-Bnf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekc-iw-mSI">
+                                <rect key="frame" x="151" y="487" width="73" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="play:" destination="q4u-Cv-xB7" eventType="touchUpInside" id="F07-0u-sdT"/>
+                                    <segue destination="BV1-FR-VrT" kind="presentation" id="2gj-ba-kbe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCJ-wf-8mx">
+                                <rect key="frame" x="162.5" y="576" width="50" height="50"/>
+                                <state key="normal" backgroundImage="speakerOn"/>
+                                <connections>
+                                    <action selector="soundOnOrOff:" destination="q4u-Cv-xB7" eventType="touchUpInside" id="d1s-uh-eFj"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="runningManHeader" translatesAutoresizingMaskIntoConstraints="NO" id="wo7-Kc-8pQ">
+                                <rect key="frame" x="137.5" y="283.5" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="wo7-Kc-8pQ" secondAttribute="height" multiplier="1:1" id="Qup-m4-6Gx"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coin Man" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbB-jZ-vB6">
+                                <rect key="frame" x="112" y="20" width="151" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRd-4P-AQh">
+                                <rect key="frame" x="172" y="112" width="31" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tRd-4P-AQh" firstAttribute="centerX" secondItem="OrA-nD-4f3" secondAttribute="centerX" id="1lW-Oy-nyW"/>
+                            <constraint firstItem="zUO-PA-1Rk" firstAttribute="top" secondItem="dbB-jZ-vB6" secondAttribute="bottom" constant="8" id="59M-3Z-77M"/>
+                            <constraint firstItem="RQp-rY-ssB" firstAttribute="centerX" secondItem="OrA-nD-4f3" secondAttribute="centerX" id="5ug-CP-1cG"/>
+                            <constraint firstItem="dbB-jZ-vB6" firstAttribute="top" secondItem="FMQ-Zw-NWD" secondAttribute="top" id="8Do-A7-Bqw"/>
+                            <constraint firstItem="tRd-4P-AQh" firstAttribute="top" secondItem="zUO-PA-1Rk" secondAttribute="bottom" constant="18" id="DrB-8x-1cf"/>
+                            <constraint firstItem="gCJ-wf-8mx" firstAttribute="top" secondItem="ekc-iw-mSI" secondAttribute="bottom" constant="29" id="JuW-fN-zZa"/>
+                            <constraint firstItem="FMQ-Zw-NWD" firstAttribute="bottom" secondItem="gCJ-wf-8mx" secondAttribute="bottom" constant="41" id="Tuf-KS-i79"/>
+                            <constraint firstItem="RQp-rY-ssB" firstAttribute="top" secondItem="tRd-4P-AQh" secondAttribute="bottom" constant="17" id="Tzk-Fk-LwK"/>
+                            <constraint firstItem="gCJ-wf-8mx" firstAttribute="centerX" secondItem="OrA-nD-4f3" secondAttribute="centerX" id="bTx-hg-Cg0"/>
+                            <constraint firstItem="wo7-Kc-8pQ" firstAttribute="centerX" secondItem="OrA-nD-4f3" secondAttribute="centerX" id="ewk-z4-1uN"/>
+                            <constraint firstItem="ekc-iw-mSI" firstAttribute="centerX" secondItem="OrA-nD-4f3" secondAttribute="centerX" id="i1U-ed-dR1"/>
+                            <constraint firstItem="zUO-PA-1Rk" firstAttribute="centerX" secondItem="OrA-nD-4f3" secondAttribute="centerX" id="m35-b5-1cp"/>
+                            <constraint firstItem="dbB-jZ-vB6" firstAttribute="centerX" secondItem="OrA-nD-4f3" secondAttribute="centerX" id="tLy-4Y-vRy"/>
+                            <constraint firstItem="wo7-Kc-8pQ" firstAttribute="centerY" secondItem="OrA-nD-4f3" secondAttribute="centerY" id="zED-Zw-LW2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="FMQ-Zw-NWD"/>
+                    </view>
+                    <connections>
+                        <outlet property="highScoreLabel" destination="tRd-4P-AQh" id="77I-d8-9IT"/>
+                        <outlet property="soundButton" destination="gCJ-wf-8mx" id="7pX-U7-smS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GWb-Gc-oCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-810.39999999999998" y="31.934032983508249"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Coin_Man" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19,6 +110,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="4" y="32"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="runningManHeader" width="75" height="100"/>
+        <image name="speakerOn" width="50" height="50"/>
+    </resources>
 </document>
