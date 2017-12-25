@@ -88,8 +88,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let grassCagagory: UInt32 = 0x1 << 5 // binary value = 16 - 10000
     
     
+    
+    
     // **************n Inital load up method *******************
     override func didMove(to view: SKView) {
+        
+        // allow the game to work on multiple devices and render correctly
+        
+        // 1. request an UITraitCollection instance
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        
+        // 2. check the idiom
+        switch (deviceIdiom) {
+            
+        case .pad:
+            // iPad style UI
+            scene?.scaleMode = SKSceneScaleMode.aspectFit
+        case .phone:
+            // iPhone and iPod touch style UI
+            print("iphone")
+        case .tv:
+            // tvOS style UI
+            print("tv")
+        default:
+            // Unspecified UI idiom
+            print("u/k")
+        }
+        
         
         physicsWorld.contactDelegate = self
         
@@ -146,6 +171,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //application became active
         let notificationCenter2 = NotificationCenter.default
         notificationCenter2.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationDidBecomeActive, object: app)
+        
+        // set gravity
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -20)
         
         // ******* start the timers ********
         beginTimers()
@@ -540,6 +568,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // apply physics to the coin man and test if the game is paused
         if scene?.isPaused == false {
             coinMan?.physicsBody?.applyForce(CGVector(dx: 0, dy: 100_000))
+            
         }
         // detect the touch on the play button
         let touch = touches.first
