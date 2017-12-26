@@ -49,6 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let explosionSound = SKAction.playSoundFileNamed("grenade.mp3", waitForCompletion: false)
     let wooshSound = SKAction.playSoundFileNamed("Woosh.mp3", waitForCompletion: false)
     let dohSound = SKAction.playSoundFileNamed("Doh.mp3", waitForCompletion: false)
+    let evilLaugh = SKAction.playSoundFileNamed("evil_Laugh.mp3", waitForCompletion: false)
     
     /* **** create the variables for the:
      coinMan, ceiling, ground, explosion, grass **** */
@@ -67,6 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinTimer: Timer?
     var bombTimer: Timer?
     var bombTypeTimer: Timer?
+    var reaperTimer: Timer?
     
     // var to change the bomb type
     var bombType = "bomb"
@@ -85,7 +87,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let coinCategory: UInt32 = 0x1 << 2     // binary value = 2 - 10
     let bombCategory: UInt32 = 0x1 << 3     // binary value = 4 - 100
     let groundAndCeilingCatagory: UInt32 = 0x1 << 4  // binary value = 8 - 1000
-    let grassCagagory: UInt32 = 0x1 << 5 // binary value = 16 - 10000
+    let grassCatgagory: UInt32 = 0x1 << 5 // binary value = 16 - 10000
+    let reaperCatagory: UInt32 = 0x1 << 6
     
     
     
@@ -123,7 +126,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // add the category to coinMan
         coinMan?.physicsBody?.categoryBitMask = coinManCategory
         // set who the coinMan is going to make contact with
-        coinMan?.physicsBody?.contactTestBitMask = coinCategory | bombCategory
+        coinMan?.physicsBody?.contactTestBitMask = coinCategory | bombCategory | reaperCatagory
         // only allow coinMan to collied with ground & celing
         coinMan?.physicsBody?.collisionBitMask = groundAndCeilingCatagory
         
@@ -227,7 +230,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             // apply the physics
             grass.physicsBody = SKPhysicsBody(rectangleOf: grass.size)
-            grass.physicsBody?.categoryBitMask = grassCagagory
+            grass.physicsBody?.categoryBitMask = grassCatgagory
             //grass.physicsBody?.collisionBitMask = coinCategory
             grass.physicsBody?.affectedByGravity = false
             grass.physicsBody?.isDynamic = false
@@ -295,6 +298,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             self.changeBombType()
         })
+        
+        reaperTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(randomNumber(inRange: 1...2)), repeats: true, block: { (timer) in
+            
+            self.theReaper()
+        })
     }
     
     // ************* method to detect the contact *****************
@@ -353,6 +361,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // get rid of the node
             contact.bodyB.node?.removeFromParent()
         }
+        
+        // detect which body the reaper is
+        if contact.bodyA.categoryBitMask == reaperCatagory {
+            
+            // find the contact position
+            explosionX = contact.contactPoint.x
+            explosionY = contact.contactPoint.y
+            
+            // get rid of the node
+            contact.bodyA.node?.removeFromParent()
+            
+            if contact.bodyA.node?.name == "grimmReaper" {
+                 run(evilLaugh)
+                playerHitReaper()
+            }
+        }
+        
+        if contact.bodyB.categoryBitMask == reaperCatagory {
+            
+            // find the contact position
+            explosionX = contact.contactPoint.x
+            explosionY = contact.contactPoint.y
+            
+            // get rid of the node
+            contact.bodyB.node?.removeFromParent()
+            
+            if contact.bodyB.node?.name == "grimmReaper" {
+                 run(evilLaugh)
+                playerHitReaper()
+            }
+        }
     }
     
     func playerHitDynamite() {
@@ -379,6 +418,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func playerHitReaper() {
+        
+        // reset the score
+        ScoreControl.score = 0
+        scoreLabel?.text = "Score: \(ScoreControl.score)"
+        
+        // reset the highscore
+        ScoreControl.highScore = 0
+        highScoreLabel?.text = "\(ScoreControl.highScore)"
+        
+        // ***** updates the default storage ******
+        let defaults = UserDefaults.standard
+        defaults.set(ScoreControl.highScore, forKey: DefaultsKeys.playerHighScore)
+        
+    }
     
     func updateHiScore() {
         
@@ -412,6 +466,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if child.name == "dynamiteBomb" {
                 child.removeFromParent()
             }
+            if child.name == "grimmReaper" {
+                child.removeFromParent()
+            }
         }
         
         // pause the game
@@ -424,6 +481,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         coinTimer?.invalidate()
         bombTimer?.invalidate()
         bombTypeTimer?.invalidate()
+        reaperTimer?.invalidate()
         
         // *** create a final score labels ***
         yourScoreLabel = SKLabelNode(text: "Your Score:")
@@ -556,6 +614,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bomb.run(SKAction.sequence([moveLeft, SKAction.removeFromParent()]))
     }
     
+    // ************* The reaper *********************
+    func theReaper() {
+        
+        // create the bomb from the saved images
+        let grimmReaper = SKSpriteNode(imageNamed: "reaper")
+        grimmReaper.name = "grimmReaper"
+        
+        grimmReaper.physicsBody = SKPhysicsBody(rectangleOf: grimmReaper.size)
+        grimmReaper.physicsBody?.categoryBitMask = self.reaperCatagory
+        grimmReaper.physicsBody?.contactTestBitMask = self.coinManCategory
+        grimmReaper.physicsBody?.affectedByGravity = false
+        grimmReaper.physicsBody?.collisionBitMask = 0
+        
+        // add it to the screen
+        addChild(grimmReaper)
+        
+        // set the max & min y positions
+        let maxY = (size.height / 2) - (grimmReaper.size.height / 2)
+        let minY = (-size.height / 2) + (grimmReaper.size.height / 2) + (sizingGrass.size.height)
+        let range = maxY - minY
+        let grimmReaperY = maxY - CGFloat(arc4random_uniform(UInt32(range)))
+        grimmReaper.position = CGPoint(x: (size.width / 2) + (grimmReaper.size.width / 2), y: grimmReaperY)
+        let moveLeft = SKAction.moveBy(x: -size.width - grimmReaper.size.width, y: 0, duration: 3.2)
+        grimmReaper.run(SKAction.sequence([moveLeft, SKAction.removeFromParent()]))
+    }
+    
     // ***************** Detect touches on the screen ******************
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -630,6 +714,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         coinTimer?.invalidate()
         bombTimer?.invalidate()
         bombTypeTimer?.invalidate()
+        reaperTimer?.invalidate()
         
     }
     

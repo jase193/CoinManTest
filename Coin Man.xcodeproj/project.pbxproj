@@ -11,6 +11,7 @@
 		434DCE1A1FD9527700CEC4AF /* bombSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 434DCE191FD9527600CEC4AF /* bombSound.mp3 */; };
 		434DCE1C1FD9681C00CEC4AF /* grenade.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 434DCE1B1FD9681C00CEC4AF /* grenade.mp3 */; };
 		434DCE1E1FD96B8C00CEC4AF /* Computer-melody-80s-style.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 434DCE1D1FD96B8C00CEC4AF /* Computer-melody-80s-style.mp3 */; };
+		438EDF7B1FF2CC3600641C4B /* evil_Laugh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 438EDF7A1FF2CC3600641C4B /* evil_Laugh.mp3 */; };
 		43C00EF11FDAB56800D0F555 /* Woosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 43C00EF01FDAB56800D0F555 /* Woosh.mp3 */; };
 		43C00EF31FDAB9AF00D0F555 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C00EF21FDAB9AF00D0F555 /* InitialViewController.swift */; };
 		43C00EF81FDEFB0100D0F555 /* ButtonClickOff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 43C00EF71FDEFB0000D0F555 /* ButtonClickOff.mp3 */; };
@@ -30,6 +31,7 @@
 		434DCE191FD9527600CEC4AF /* bombSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bombSound.mp3; sourceTree = "<group>"; };
 		434DCE1B1FD9681C00CEC4AF /* grenade.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = grenade.mp3; sourceTree = "<group>"; };
 		434DCE1D1FD96B8C00CEC4AF /* Computer-melody-80s-style.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Computer-melody-80s-style.mp3"; sourceTree = "<group>"; };
+		438EDF7A1FF2CC3600641C4B /* evil_Laugh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = evil_Laugh.mp3; sourceTree = "<group>"; };
 		43C00EF01FDAB56800D0F555 /* Woosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Woosh.mp3; sourceTree = "<group>"; };
 		43C00EF21FDAB9AF00D0F555 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		43C00EF71FDEFB0000D0F555 /* ButtonClickOff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ButtonClickOff.mp3; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 		434DCE161FD89CD500CEC4AF /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				438EDF7A1FF2CC3600641C4B /* evil_Laugh.mp3 */,
 				434DCE191FD9527600CEC4AF /* bombSound.mp3 */,
 				434DCE1B1FD9681C00CEC4AF /* grenade.mp3 */,
 				434DCE1D1FD96B8C00CEC4AF /* Computer-melody-80s-style.mp3 */,
@@ -173,6 +176,7 @@
 				43FC7DC61FD2FE11008C4FB3 /* Actions.sks in Resources */,
 				43C00EFC1FDEFB1500D0F555 /* ClickOn.mp3 in Resources */,
 				4345E0851FE06A2300E08388 /* Doh.mp3 in Resources */,
+				438EDF7B1FF2CC3600641C4B /* evil_Laugh.mp3 in Resources */,
 				43FC7DDA1FD6C835008C4FB3 /* Assets.xcassets in Resources */,
 				434DCE1C1FD9681C00CEC4AF /* grenade.mp3 in Resources */,
 				434DCE1E1FD96B8C00CEC4AF /* Computer-melody-80s-style.mp3 in Resources */,
