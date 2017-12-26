@@ -173,7 +173,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         notificationCenter2.addObserver(self, selector: #selector(appMovedToForeground), name: Notification.Name.UIApplicationDidBecomeActive, object: app)
         
         // set gravity
-        self.physicsWorld.gravity = CGVector(dx: 0, dy: -20)
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -40)
         
         // ******* start the timers ********
         beginTimers()
@@ -286,7 +286,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         })
         
         // function to create bombs every 1 second and keep repeating
-        bombTimer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true, block: { (timer) in
+        bombTimer = Timer.scheduledTimer(withTimeInterval: 1.2, repeats: true, block: { (timer) in
             // call the coin method
             self.createBomb()
         })
@@ -358,7 +358,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func playerHitDynamite() {
         
         // get random num between 1 & 3 for the image
-        let ranImageNumber = randomNumber(inRange: 1...3)
+        let ranImageNumber = randomNumber(inRange: 1...5)
         
         minusNumImage = SKSpriteNode(imageNamed: "minus-\(ranImageNumber)")
         
@@ -369,17 +369,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         run(dohSound)
         addChild(minusNumImage!)
         
-        // reduce the score by 1 if its greater the 0
-        if ScoreControl.score >= ranImageNumber {
-            ScoreControl.score -= ranImageNumber
-            scoreLabel?.text = "Score: \(ScoreControl.score)"
-        } else {
-            ScoreControl.score = 0
-            scoreLabel?.text = "Score: \(ScoreControl.score)"
-        }
+        ScoreControl.score -= ranImageNumber
+        scoreLabel?.text = "Score: \(ScoreControl.score)"
         
         // remove the image
-        _ = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { (timer) in
+        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
             
             self.minusNumImage?.removeFromParent()
         }
@@ -505,7 +499,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         coin.position = CGPoint(x: (size.width / 2) + (coin.size.width / 2), y: coinY)
         
         // ceate an action for the coin
-        let moveLeft = SKAction.moveBy(x: -size.width - coin.size.width, y: 0, duration: 4)
+        let moveLeft = SKAction.moveBy(x: -size.width - coin.size.width, y: 0, duration: 5)
         
         // run the action
         coin.run(SKAction.sequence([moveLeft, SKAction.removeFromParent()]))
@@ -521,7 +515,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             // change the bomb back after a second
             // after one second the bomb image returns to normal
-            _ = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { (timer) in
+            _ = Timer.scheduledTimer(withTimeInterval: 1.2, repeats: false, block: { (timer) in
                 
                 self.bombType = "bomb"
             })
@@ -567,7 +561,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // apply physics to the coin man and test if the game is paused
         if scene?.isPaused == false {
-            coinMan?.physicsBody?.applyForce(CGVector(dx: 0, dy: 100_000))
+            coinMan?.physicsBody?.applyForce(CGVector(dx: 0, dy: 150_000))
             
         }
         // detect the touch on the play button
