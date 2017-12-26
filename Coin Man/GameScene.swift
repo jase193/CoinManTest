@@ -357,7 +357,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func playerHitDynamite() {
         
-        // get random num between 1 & 3 for the image
+        // get random num between 1 & 5 for the image
         let ranImageNumber = randomNumber(inRange: 1...5)
         
         minusNumImage = SKSpriteNode(imageNamed: "minus-\(ranImageNumber)")
@@ -373,7 +373,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel?.text = "Score: \(ScoreControl.score)"
         
         // remove the image
-        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
+        _ = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { (timer) in
             
             self.minusNumImage?.removeFromParent()
         }
