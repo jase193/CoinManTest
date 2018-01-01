@@ -299,7 +299,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.changeBombType()
         })
         
-        reaperTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(randomNumber(inRange: 1...2)), repeats: true, block: { (timer) in
+        reaperTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(randomNumber(inRange: 5...10)), repeats: true, block: { (timer) in
             
             self.theReaper()
         })
@@ -636,9 +636,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let range = maxY - minY
         let grimmReaperY = maxY - CGFloat(arc4random_uniform(UInt32(range)))
         grimmReaper.position = CGPoint(x: (size.width / 2) + (grimmReaper.size.width / 2), y: grimmReaperY)
-        let moveLeft = SKAction.moveBy(x: -size.width - grimmReaper.size.width, y: 0, duration: 3.2)
+        let moveLeft = SKAction.moveBy(x: -size.width - grimmReaper.size.width, y: 0, duration: 2)
         grimmReaper.run(SKAction.sequence([moveLeft, SKAction.removeFromParent()]))
     }
+    
     
     // ***************** Detect touches on the screen ******************
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
