@@ -289,7 +289,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         })
         
         // function to create bombs every 1 second and keep repeating
-        bombTimer = Timer.scheduledTimer(withTimeInterval: 1.2, repeats: true, block: { (timer) in
+        bombTimer = Timer.scheduledTimer(withTimeInterval: 1.21, repeats: true, block: { (timer) in
             // call the coin method
             self.createBomb()
         })
